@@ -30,18 +30,6 @@ def bounce(widget, ball):
 
 class Alien(Widget):
     image_path = "SpaceInvader.png"
-    # def __init__(self, *args, **kwargs):
-    #     super(Alien, self).__init__(**kwargs)
-    #     print(kwargs)
-
-        # alien_image = Image(
-        #     source="SpaceInvader.png",
-        #     pos_hint={"center_y": .8},
-        #     allow_stretch=False
-        # )
-        # alien_image.size = (alien_image.texture_size[0] * .5, alien_image.texture_size[1] * .5),
-        # self.add_widget(alien_image)
-
 
 
 class Paddle(Widget):
@@ -60,6 +48,7 @@ class Ball(Widget):
 class Game(Widget):
     ball = ObjectProperty(None)
     paddle = ObjectProperty(None)
+    aliens = ObjectProperty(None)
 
     def __init__(self, *args, **kwargs):
         super(Game, self).__init__(**kwargs)
@@ -84,9 +73,13 @@ class Game(Widget):
     def serve_ball(self, vel=(0, -4)):
         self.ball.center = self.center
         self.ball.velocity = vel
-        # for i in np.arange(.6, 1, .1):
-        #     print(i)
-        #     alien = Alien()
+
+        a = Alien(center_x=.5, center_y=1)
+
+        self.aliens.add_widget(a)
+
+        # for i in np.arange(.1, 1, .1):
+        #     alien = Alien(center_x=50+i, center_y=.7)
         #     self.add_widget(alien)
 
         # alien = Alien(pos=(10, 100))
@@ -121,12 +114,14 @@ class Game(Widget):
         self.paddle.center_x = touch.x
 
 
+
 class SpaceInvaders(App):
     def build(self):
         game = Game()
         game.serve_ball()
         Clock.schedule_interval(game.update, 1 / 600)
         return game
+
 
 # Need the line below in order for the program to run on Ubuntu. I don't know why; the .kv file is named appropriately
 # Builder.load_file("SpaceInvaders.kv")

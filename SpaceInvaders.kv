@@ -17,7 +17,8 @@
 <Alien>:
     Image:
         source: root.image_path
-        pos: self.parent.x * self.parent.parent.width, self.parent.y * self.parent.parent.height
+        center_x: self.parent.center_x * self.parent.width
+        center_y: self.parent.center_y * self.parent.height
         size: self.texture_size[0] * .5, self.texture_size[1] * .5
         allow_stretch: False
 
@@ -27,10 +28,12 @@
 <Game>:
     ball: ball
     paddle: paddle
+    aliens: aliens
 
-    Alien:
-        id: alien
-        pos: .5, .8
+    FloatLayout:
+        width: root.width
+        height: root.height
+        id: aliens
 
     Ball:
         id: ball
