@@ -116,7 +116,8 @@ class SpaceInvaders(App):
         Clock.schedule_interval(game.update, 1 / 600)
         return game
 
-Builder.load_file("SpaceInvaders.kv")
+# Need the line below in order for the program to run on Ubuntu. I don't know why; the .kv file is named appropriately
+# Builder.load_file("SpaceInvaders.kv")
 
 if __name__ == '__main__':
     SpaceInvaders().run()
