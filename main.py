@@ -6,13 +6,14 @@ os.environ['KIVY_WINDOW'] = 'sdl2'
 
 from kivy.app import App
 from kivy.uix.widget import Widget
+from kivy.uix.image import Image
 from kivy.core.window import Window
 from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProperty
 from kivy.vector import Vector
 from kivy.clock import Clock
 import sys
 from threading import Thread
-from numpy import arange
+import numpy as np
 from kivy.lang import Builder
 
 
@@ -30,6 +31,14 @@ def bounce(widget, ball):
 class Alien(Widget):
     def __init__(self, *args, **kwargs):
         super(Alien, self).__init__(**kwargs)
+        # alien_image = Image(
+        #     source="SpaceInvader.png",
+        #     pos_hint={"center_y": .8},
+        #     allow_stretch=False
+        # )
+        # alien_image.size = (alien_image.texture_size[0] * .5, alien_image.texture_size[1] * .5),
+        # self.add_widget(alien_image)
+
 
 
 class Paddle(Widget):
@@ -72,10 +81,10 @@ class Game(Widget):
     def serve_ball(self, vel=(0, -4)):
         self.ball.center = self.center
         self.ball.velocity = vel
-        # for i in arange(1, 100, 5):
-        #     print(i)
-        #     alien = Alien(pos_hint=(i * self.height, .8*self.width))
-        #     self.add_widget(alien)
+        for i in np.arange(.6, 1, .1):
+            print(i)
+            alien = Alien(pos=(300, 100))
+            self.add_widget(alien)
 
         # alien = Alien(pos=(10, 100))
         # self.add_widget(alien)
