@@ -13,6 +13,7 @@ from kivy.clock import Clock
 import sys
 from threading import Thread
 from numpy import arange
+from kivy.lang import Builder
 
 
 def bounce(widget, ball):
@@ -71,10 +72,16 @@ class Game(Widget):
     def serve_ball(self, vel=(0, -4)):
         self.ball.center = self.center
         self.ball.velocity = vel
-        for i in arange(.1, 1, .1):
-            print(i)
-            alien = Alien(pos_hint={"center_x": i, "center_y": .8})
-            self.add_widget(alien)
+        # for i in arange(1, 100, 5):
+        #     print(i)
+        #     alien = Alien(pos_hint=(i * self.height, .8*self.width))
+        #     self.add_widget(alien)
+
+        # alien = Alien(pos=(10, 100))
+        # self.add_widget(alien)
+        # print(len(self.children))
+        # print(alien.get_root_window())
+        # print(self.pos)
 
     def update(self, dt):
         self.ball.move()
@@ -109,6 +116,7 @@ class SpaceInvaders(App):
         Clock.schedule_interval(game.update, 1 / 600)
         return game
 
+Builder.load_file("SpaceInvaders.kv")
 
 if __name__ == '__main__':
     SpaceInvaders().run()

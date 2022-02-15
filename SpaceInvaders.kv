@@ -15,18 +15,27 @@
             size:self.size
 
 <Alien>:
-    size: 100, 100
     Image:
         source: "SpaceInvader.png"
+        pos: 300, 100
+        size: self.texture_size[0] * .5, self.texture_size[1] * .5
+        allow_stretch: False
+
 
 
 <Game>:
     ball: ball
     paddle: paddle
 
+    FloatLayout:
+        size_hint: None, None
+
+    Alien:
+        id: a
+
     Ball:
         id: ball
-        center: self.parent.center
+        center: root.center
 
     Paddle:
         id: paddle
