@@ -21,11 +21,13 @@ class Paddle(Widget):
         if self.collide_widget(ball):
             vx, vy = ball.velocity  # x and y components of the ball's velocity
             offset = (ball.center_x - self.center_x) / (self.width / 2)  # ball's offset relative to center of paddle
-            bounced = Vector(vx, -1*vy)  # a Vector representing the initial speed of the ball after bounced
+            bounced = Vector(vx, -1 * vy)  # a Vector representing the initial speed of the ball after bounced
             vel = bounced * 1.00  # increases the x and y components of the ball's velocity by a factor of 10%
-            ball.velocity = min(vel.x + offset, 20) if vel.x + offset > 0 else max(vel.x + offset, -20),\
-                            min(vel.y, 20) if vel.y > 0 else max(vel.y, -20)  # sets the ball's new velocity, accounting for the offset
+            ball.velocity = min(vel.x + offset, 20) if vel.x + offset > 0 else max(vel.x + offset, -20), \
+                            min(vel.y, 20) if vel.y > 0 else max(vel.y,
+                                                                 -20)  # sets the ball's new velocity, accounting for the offset
             print(ball.velocity)
+
 
 class Ball(Widget):
     velocity_x = NumericProperty(0)
@@ -41,7 +43,7 @@ class Game(Widget):
     paddle = ObjectProperty(None)
 
     def __init__(self, *args, **kwargs):
-        super(Game, self).__init__(*args, **kwargs)
+        super(Game, self).__init__(**kwargs)
         self._keyboard1 = Window.request_keyboard(self._keyboard_closed, self)
 
         self._keyboard1.bind(on_key_down=self._on_keyboard_down)
@@ -87,7 +89,6 @@ class Game(Widget):
 
     def on_touch_move(self, touch):
         self.paddle.center_x = touch.x
-
 
 
 class SpaceInvaders(App):
