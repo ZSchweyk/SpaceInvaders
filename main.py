@@ -14,19 +14,23 @@ import sys
 from threading import Thread
 
 
+def bounce(widget, ball):
+    if widget.collide_widget(ball):
+        vx, vy = ball.velocity  # x and y components of the ball's velocity
+        offset = (ball.center_x - widget.center_x) / (widget.width / 2)  # ball's offset relative to center of paddle
+        bounced = Vector(vx, -1 * vy)  # a Vector representing the initial speed of the ball after bounced
+        vel = bounced * 1.00  # increases the x and y components of the ball's velocity by a factor of 10%
+        ball.velocity = min(vel.x + offset, 20) if vel.x + offset > 0 else max(vel.x + offset, -20), \
+                        min(vel.y, 20) if vel.y > 0 else max(vel.y,
+                                                             -20)  # sets the ball's new velocity, accounting for the offset
+
+
+class Alien(Widget):
+    pass
+
+
 class Paddle(Widget):
     score = NumericProperty(0)
-
-    def bounce_ball(self, ball):
-        if self.collide_widget(ball):
-            vx, vy = ball.velocity  # x and y components of the ball's velocity
-            offset = (ball.center_x - self.center_x) / (self.width / 2)  # ball's offset relative to center of paddle
-            bounced = Vector(vx, -1 * vy)  # a Vector representing the initial speed of the ball after bounced
-            vel = bounced * 1.00  # increases the x and y components of the ball's velocity by a factor of 10%
-            ball.velocity = min(vel.x + offset, 20) if vel.x + offset > 0 else max(vel.x + offset, -20), \
-                            min(vel.y, 20) if vel.y > 0 else max(vel.y,
-                                                                 -20)  # sets the ball's new velocity, accounting for the offset
-            print(ball.velocity)
 
 
 class Ball(Widget):
@@ -70,7 +74,8 @@ class Game(Widget):
         self.ball.move()
 
         # bounce of paddles
-        self.paddle.bounce_ball(self.ball)
+        bounce(self.paddle, self.ball)
+        # self.paddle.bounce_ball(self.ball)
 
         # bounce ball off the top or sides
         if self.ball.top > self.top:
