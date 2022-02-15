@@ -12,6 +12,7 @@ from kivy.vector import Vector
 from kivy.clock import Clock
 import sys
 from threading import Thread
+from numpy import arange
 
 
 def bounce(widget, ball):
@@ -26,7 +27,8 @@ def bounce(widget, ball):
 
 
 class Alien(Widget):
-    pass
+    def __init__(self, *args, **kwargs):
+        super(Alien, self).__init__(**kwargs)
 
 
 class Paddle(Widget):
@@ -69,6 +71,10 @@ class Game(Widget):
     def serve_ball(self, vel=(0, -4)):
         self.ball.center = self.center
         self.ball.velocity = vel
+        for i in arange(.1, 1, .1):
+            print(i)
+            alien = Alien(pos_hint={"center_x": i, "center_y": .8})
+            self.add_widget(alien)
 
     def update(self, dt):
         self.ball.move()
