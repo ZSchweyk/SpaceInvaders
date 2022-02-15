@@ -70,25 +70,24 @@ class Game(Widget):
         # bounce of paddles
         self.paddle.bounce_ball(self.ball)
 
-        # bounce ball off bottom or top
+        # bounce ball off the top or sides
         if self.ball.top > self.top:
             self.ball.velocity_y *= -1
         elif self.ball.x + self.ball.width > self.width or self.ball.x < self.x:
             self.ball.velocity_x *= -1
 
-        # went of to a side to score point?
+        # went off to the bottom side to lose a life?
         if self.ball.y < self.y:
             print("Lost")
             time.sleep(2)
+            self.paddle.center_x = self.width / 2
             self.serve_ball()
         if self.ball.x > self.width:
             pass
 
     def on_touch_move(self, touch):
-        if touch.x < self.width / 2:
-            self.player1.center_y = touch.y
-        if touch.x > self.width - self.width / 2:
-            self.player2.center_y = touch.y
+        self.paddle.center_x = touch.x
+
 
 
 class SpaceInvaders(App):
