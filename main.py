@@ -22,15 +22,18 @@ def bounce(widget, ball):
         vx, vy = ball.velocity  # x and y components of the ball's velocity
         offset = (ball.center_x - widget.center_x) / (widget.width / 2)  # ball's offset relative to center of paddle
         bounced = Vector(vx, -1 * vy)  # a Vector representing the initial speed of the ball after bounced
-        vel = bounced * 1.00  # increases the x and y components of the ball's velocity by a factor of 10%
-        ball.velocity = min(vel.x + offset, 20) if vel.x + offset > 0 else max(vel.x + offset, -20), \
-                        min(vel.y, 20) if vel.y > 0 else max(vel.y,
-                                                             -20)  # sets the ball's new velocity, accounting for the offset
+        vel = bounced * 1.025  # increases the x and y components of the ball's velocity by a factor of 10%
+        ball.velocity = min(vel.x + offset, 17) if vel.x + offset > 0 else max(vel.x + offset, -17), \
+                        min(vel.y, 17) if vel.y > 0 else max(vel.y,
+                                                             -17)  # sets the ball's new velocity, accounting for the offset
 
 
 class Alien(Widget):
-    def __init__(self, *args, **kwargs):
-        super(Alien, self).__init__(**kwargs)
+    image_path = "SpaceInvader.png"
+    # def __init__(self, *args, **kwargs):
+    #     super(Alien, self).__init__(**kwargs)
+    #     print(kwargs)
+
         # alien_image = Image(
         #     source="SpaceInvader.png",
         #     pos_hint={"center_y": .8},
@@ -81,10 +84,10 @@ class Game(Widget):
     def serve_ball(self, vel=(0, -4)):
         self.ball.center = self.center
         self.ball.velocity = vel
-        for i in np.arange(.6, 1, .1):
-            print(i)
-            alien = Alien(pos=(300, 100))
-            self.add_widget(alien)
+        # for i in np.arange(.6, 1, .1):
+        #     print(i)
+        #     alien = Alien()
+        #     self.add_widget(alien)
 
         # alien = Alien(pos=(10, 100))
         # self.add_widget(alien)

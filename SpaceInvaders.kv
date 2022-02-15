@@ -16,16 +16,21 @@
 
 <Alien>:
     Image:
-        source: "SpaceInvader.png"
-        pos: 300, 100
+        source: root.image_path
+        pos: self.parent.x * self.parent.parent.width, self.parent.y * self.parent.parent.height
         size: self.texture_size[0] * .5, self.texture_size[1] * .5
         allow_stretch: False
+
 
 
 
 <Game>:
     ball: ball
     paddle: paddle
+
+    Alien:
+        id: alien
+        pos: .5, .8
 
     Ball:
         id: ball
