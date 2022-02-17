@@ -2,6 +2,8 @@ import os
 import time
 import random
 
+from kivy.uix.label import Label
+
 os.environ['KIVY_WINDOW'] = 'sdl2'
 
 from kivy.app import App
@@ -74,9 +76,9 @@ class Game(Widget):
         self.ball.center = self.center
         self.ball.velocity = vel
 
-        a = Alien(center_x=.5, center_y=1)
-
-        self.aliens.add_widget(a)
+        # a = Alien(center_x=.75, center_y=.8)
+        #
+        # self.add_widget(a)
 
         # for i in np.arange(.1, 1, .1):
         #     alien = Alien(center_x=50+i, center_y=.7)

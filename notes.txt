@@ -1,0 +1,2 @@
+Make variables in .kv file
+https://stackoverflow.com/questions/28255695/variables-in-kv-language-kivy#:~:text=Yes%2C%20there%20is%20a%20way.%20What%20you%20are%20looking%20for%20is%20this%20expression%3A
