@@ -32,6 +32,7 @@ def bounce(widget, ball):
 
 class Alien(Widget):
     image_path = "SpaceInvader.png"
+    alien_size = .3, .3
 
 
 class Paddle(Widget):
