@@ -19,7 +19,7 @@
         source: root.image_path
         center_x: self.parent.center_x * self.parent.parent.width
         center_y: self.parent.center_y * self.parent.parent.height
-        size: self.texture_size[0] * self.parent.size[0], self.texture_size[1] * self.parent.size[1]
+        size: self.texture_size[0] * root.alien_size, self.texture_size[1] * root.alien_size
         allow_stretch: False
 
 
@@ -27,6 +27,7 @@
     ball: ball
     paddle: paddle
     aliens: aliens
+    alien1: alien1
 
     FloatLayout:
         width: root.width
@@ -34,39 +35,31 @@
         id: aliens
 
     Alien:
-        size: self.alien_size
+        id: alien1
         center_x: .1
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .2
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .3
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .4
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .5
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .6
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .7
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .8
         center_y: .8
     Alien:
-        size: self.alien_size
         center_x: .9
         center_y: .8
 

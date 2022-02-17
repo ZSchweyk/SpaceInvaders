@@ -24,15 +24,18 @@ def bounce(widget, ball):
         vx, vy = ball.velocity  # x and y components of the ball's velocity
         offset = (ball.center_x - widget.center_x) / (widget.width / 2)  # ball's offset relative to center of paddle
         bounced = Vector(vx, -1 * vy)  # a Vector representing the initial speed of the ball after bounced
-        vel = bounced * 1.025  # increases the x and y components of the ball's velocity by a factor of 10%
+        vel = bounced * 1.025  # increases the x and y components of the ball's velocity by a factor of x%
         ball.velocity = min(vel.x + offset, 17) if vel.x + offset > 0 else max(vel.x + offset, -17), \
                         min(vel.y, 17) if vel.y > 0 else max(vel.y,
                                                              -17)  # sets the ball's new velocity, accounting for the offset
+        print("COLLIDED")
+    else:
+        pass
 
 
 class Alien(Widget):
     image_path = "SpaceInvader.png"
-    alien_size = .3, .3
+    alien_size = .3
 
 
 class Paddle(Widget):
@@ -52,6 +55,7 @@ class Game(Widget):
     ball = ObjectProperty(None)
     paddle = ObjectProperty(None)
     aliens = ObjectProperty(None)
+    alien1 = ObjectProperty(None)
 
     def __init__(self, *args, **kwargs):
         super(Game, self).__init__(**kwargs)
@@ -96,6 +100,7 @@ class Game(Widget):
 
         # bounce of paddles
         bounce(self.paddle, self.ball)
+        bounce(self.alien1, self.ball)
         # self.paddle.bounce_ball(self.ball)
 
         # bounce ball off the top or sides
@@ -110,8 +115,6 @@ class Game(Widget):
             time.sleep(2)
             self.paddle.center_x = self.width / 2
             self.serve_ball()
-        if self.ball.x > self.width:
-            pass
 
     def on_touch_move(self, touch):
         self.paddle.center_x = touch.x
@@ -127,7 +130,7 @@ class SpaceInvaders(App):
 
 
 # Need the line below in order for the program to run on Ubuntu. I don't know why; the .kv file is named appropriately
-# Builder.load_file("SpaceInvaders.kv")
+Builder.load_file("SpaceInvaders.kv")
 
 if __name__ == '__main__':
     SpaceInvaders().run()
